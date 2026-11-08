@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>张皖晴 · 个人主页</title>
+<style>
+  :root {
+    --bg: #0b1120;
+    --bg2: #0f172a;
+    --card: #151e32;
+    --card2: #1a2440;
+    --line: #253252;
+    --text: #e6edf7;
+    --muted: #93a1b8;
+    --accent: #5b8def;
+    --accent2: #7c5cff;
+    --teal: #2dd4bf;
+    --gold: #f5c04a;
+    --pink: #ec6c9e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+    color: var(--text); background: var(--bg); line-height: 1.7;
+    background-image:
+      radial-gradient(1200px 600px at 15% -10%, rgba(91,141,239,.18), transparent 60%),
+      radial-gradient(1000px 500px at 90% 0%, rgba(124,92,255,.14), transparent 55%),
+      radial-gradient(900px 500px at 50% 110%, rgba(45,212,191,.10), transparent 55%);
+    background-attachment: fixed;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--teal); }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* 顶部导航 */
+  nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(11,17,32,.82); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { font-weight: 700; font-size: 17px; letter-spacing: .5px; }
+  .brand span { color: var(--accent); }
+  .nav-links { display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav-links a { padding: 6px 11px; border-radius: 8px; font-size: 13.5px; color: var(--muted); }
+  .nav-links a:hover { background: rgba(91,141,239,.12); color: var(--text); }
+
+  /* Hero */
+  header.hero { padding: 72px 0 56px; }
+  .hero-inner { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+  .avatar {
+    width: 132px; height: 132px; border-radius: 50%; flex: 0 0 auto;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 54px; font-weight: 700; color: #fff;
+    box-shadow: 0 12px 40px rgba(91,141,239,.35);
+    letter-spacing: 2px; position: relative;
+  }
+  .avatar::after {
+    content: ""; position: absolute; inset: -6px; border-radius: 50%;
+    border: 2px solid transparent; border-top-color: var(--teal); border-right-color: var(--teal);
+    animation: spin 6s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .hero h1 { font-size: 42px; letter-spacing: 1px; margin-bottom: 8px; }
+  .hero h1 .en { font-size: 20px; color: var(--muted); font-weight: 400; margin-left: 10px; letter-spacing: .5px; }
+  .hero .subtitle { color: var(--muted); font-size: 16px; margin-bottom: 18px; }
+  .hero .subtitle b { color: var(--text); font-weight: 600; }
+  .hero .intro-line { color: var(--muted); font-size: 14px; max-width: 560px; margin-bottom: 18px; }
+  .tags { display: flex; gap: 10px; flex-wrap: wrap; }
+  .tag {
+    font-size: 13px; padding: 5px 14px; border-radius: 999px;
+    background: rgba(91,141,239,.14); border: 1px solid rgba(91,141,239,.3); color: #bcd3ff;
+  }
+  .tag.t2 { background: rgba(45,212,191,.12); border-color: rgba(45,212,191,.3); color: #9ef0e2; }
+  .tag.t3 { background: rgba(245,192,74,.12); border-color: rgba(245,192,74,.3); color: #f9df9e; }
+
+  /* Hero 行动按钮 + GitHub 徽章 */
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 20px; align-items: center; }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 14px; padding: 10px 20px; border-radius: 10px; font-weight: 600;
+    background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff;
+    box-shadow: 0 8px 24px rgba(91,141,239,.3); transition: transform .15s, box-shadow .15s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(91,141,239,.45); color: #fff; }
+  .btn-ghost2 {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 14px; padding: 10px 20px; border-radius: 10px;
+    border: 1px solid var(--line); color: var(--muted); transition: all .15s;
+  }
+  .btn-ghost2:hover { border-color: var(--accent); color: var(--text); }
+  .gh-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+  .gh-badge {
+    display: inline-flex; align-items: center; gap: 6px; font-size: 12px;
+    padding: 4px 12px; border-radius: 999px; border: 1px solid var(--line);
+    background: var(--card); color: var(--muted);
+  }
+  .gh-badge b { color: var(--text); font-weight: 600; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #3fb950; display: inline-block; }
+
+  /* 分区标题 */
+  section { padding: 44px 0; }
+  .sec-head { margin-bottom: 28px; }
+  .sec-head .no { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: 2px; }
+  .sec-head h2 { font-size: 28px; margin: 6px 0 10px; letter-spacing: .5px; }
+  .sec-head p { color: var(--muted); font-size: 14.5px; }
+
+  /* 自我介绍 */
+  .intro-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 18px; }
+  @media (max-width: 800px) { .intro-grid { grid-template-columns: 1fr; } }
+  .intro-card, .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px;
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+  }
+  .intro-card:hover, .card:hover { border-color: rgba(91,141,239,.45); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,.35); }
+  .intro-card h3 { font-size: 17px; margin-bottom: 14px; color: var(--accent); }
+  .intro-card p { color: var(--muted); font-size: 14.5px; margin-bottom: 10px; }
+  .info-list { list-style: none; }
+  .info-list li { display: flex; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+  .info-list li:last-child { border-bottom: none; }
+  .info-list .k { color: var(--muted); width: 96px; flex: 0 0 auto; }
+  .info-list .v { color: var(--text); }
+
+  /* 技术栈进度条 */
+  .skill-list { list-style: none; }
+  .skill-list li { margin-bottom: 16px; }
+  .skill-list .sk-top { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 6px; }
+  .skill-list .sk-top .nm { color: var(--text); font-weight: 600; }
+  .skill-list .sk-top .lv { color: var(--muted); font-size: 12.5px; }
+  .bar { height: 8px; border-radius: 999px; background: rgba(37,50,82,.6); overflow: hidden; }
+  .bar .fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--accent), var(--teal)); width: 0; transition: width 1.2s cubic-bezier(.2,.7,.3,1); }
+
+  /* 项目卡片网格 */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+  .proj { display: flex; flex-direction: column; }
+  .proj .top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .proj .icon { width: 42px; height: 42px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 700; color: #fff; }
+  .proj h3 { font-size: 17.5px; margin-bottom: 6px; }
+  .proj .lang {
+    font-size: 11.5px; padding: 2px 10px; border-radius: 999px;
+    background: rgba(91,141,239,.14); color: #bcd3ff; border: 1px solid rgba(91,141,239,.25);
+  }
+  .proj p { color: var(--muted); font-size: 13.8px; flex: 1; margin-bottom: 12px; }
+  .proj .tech-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+  .proj .tech-tags span {
+    font-size: 11px; padding: 2px 8px; border-radius: 6px;
+    background: rgba(124,92,255,.12); color: #c9b9ff; border: 1px solid rgba(124,92,255,.22);
+  }
+  .proj .links { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; padding: 7px 14px; border-radius: 9px;
+    background: rgba(91,141,239,.15); border: 1px solid rgba(91,141,239,.35); color: #c6d9ff;
+    transition: all .15s;
+  }
+  .btn:hover { background: rgba(91,141,239,.28); color: #fff; }
+  .btn.ghost { background: transparent; border-color: var(--line); color: var(--muted); }
+  .btn.ghost:hover { border-color: var(--accent); color: var(--text); }
+
+  /* 时间线 */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content: ""; position: absolute; left: 8px; top: 4px; bottom: 4px; width: 2px; background: linear-gradient(var(--accent), var(--accent2), var(--teal)); opacity: .5; }
+  .tl-item { position: relative; margin-bottom: 26px; }
+  .tl-item::before {
+    content: ""; position: absolute; left: -26px; top: 6px; width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent); box-shadow: 0 0 0 4px rgba(91,141,239,.2);
+  }
+  .tl-item .tl-date { font-size: 12.5px; color: var(--gold); font-weight: 600; letter-spacing: .5px; }
+  .tl-item .tl-title { font-size: 15.5px; font-weight: 600; margin: 3px 0 4px; }
+  .tl-item .tl-desc { font-size: 13.5px; color: var(--muted); }
+  .tl-item .tl-tag { display: inline-block; font-size: 11px; padding: 1px 8px; border-radius: 6px; background: rgba(45,212,191,.12); color: #9ef0e2; margin-top: 6px; }
+
+  /* 课程/实验列表 */
+  .course-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; }
+  .course {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px;
+    transition: transform .2s, border-color .2s;
+  }
+  .course:hover { border-color: rgba(91,141,239,.45); transform: translateY(-2px); }
+  .course .c-icon { width: 40px; height: 40px; border-radius: 10px; flex: 0 0 auto; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .course .c-name { font-size: 14.5px; font-weight: 600; }
+  .course .c-desc { font-size: 12.8px; color: var(--muted); margin-top: 2px; }
+  .course .c-status { font-size: 11px; margin-top: 6px; display: inline-block; padding: 1px 8px; border-radius: 6px; background: rgba(63,185,80,.14); color: #7ee08a; }
+
+  /* 成果方块（正方形，醒目） */
+  .ach-square-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px; margin-bottom: 8px;
+  }
+  .ach-square {
+    position: relative; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 6px;
+    aspect-ratio: 1 / 1; border: 1px solid var(--line); border-radius: 20px;
+    background: linear-gradient(160deg, rgba(91,141,239,.10), rgba(124,92,255,.06));
+    cursor: pointer; font-family: inherit; color: var(--text); padding: 20px;
+    transition: transform .22s, box-shadow .22s, border-color .22s;
+  }
+  .ach-square:hover {
+    transform: translateY(-6px); border-color: rgba(91,141,239,.55);
+    box-shadow: 0 16px 36px rgba(91,141,239,.22);
+  }
+  .ach-square-icon { font-size: 34px; }
+  .ach-square-num { font-size: 54px; font-weight: 800; line-height: 1; }
+  .ach-square-label { font-size: 17px; font-weight: 700; }
+  .ach-square-hint { font-size: 12px; color: var(--muted); }
+
+  /* 证书（正常照片比例，横向矩形，尺寸紧凑） */
+  .cert-title { font-size: 17px; font-weight: 700; margin: 30px 0 16px; color: var(--text); }
+  .cert-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .cert-card {
+    display: flex; flex-direction: column; background: var(--card);
+    border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    text-decoration: none; transition: transform .22s, box-shadow .22s, border-color .22s;
+    max-width: 420px;
+  }
+  .cert-card:hover { transform: translateY(-4px); border-color: rgba(91,141,239,.5); box-shadow: 0 12px 28px rgba(0,0,0,.12); }
+  .cert-card img { width: 100%; display: block; aspect-ratio: 3 / 2; object-fit: contain; background: #fff; padding: 10px; box-sizing: border-box; }
+  .cert-card-info {
+    padding: 14px 20px; border-top: 1px solid var(--line);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .cert-card-info b { font-size: 15px; color: var(--text); }
+  .cert-card-info span { font-size: 12.5px; color: var(--muted); }
+  .cert-card-empty {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 130px; border: 2px dashed var(--line); background: var(--card);
+    max-width: 420px;
+  }
+  .cert-empty-inner { text-align: center; padding: 16px; }
+  .cert-empty-icon { font-size: 32px; margin-bottom: 8px; }
+  .cert-empty-t { font-size: 15px; font-weight: 600; color: var(--text); }
+  .cert-empty-s { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+
+  /* 成果详情弹窗 */
+  .ach-modal { position: fixed; inset: 0; z-index: 100; display: none; }
+  .ach-modal.open { display: block; }
+  .ach-modal-mask { position: absolute; inset: 0; background: rgba(10,14,24,.6); backdrop-filter: blur(3px); }
+  .ach-modal-body {
+    position: relative; z-index: 1; width: min(560px, calc(100vw - 40px));
+    max-height: 78vh; overflow: auto; margin: 60px auto 0;
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    padding: 28px 28px 24px; box-shadow: 0 24px 60px rgba(0,0,0,.35);
+  }
+  .ach-modal-close {
+    position: absolute; top: 14px; right: 14px; width: 34px; height: 34px;
+    border-radius: 50%; border: 1px solid var(--line); background: var(--card);
+    color: var(--muted); cursor: pointer; font-size: 15px; line-height: 1;
+  }
+  .ach-modal-close:hover { color: var(--text); border-color: var(--accent); }
+  .ach-modal-title { font-size: 19px; font-weight: 700; margin-bottom: 16px; color: var(--text); }
+  .ach-modal-list { display: flex; flex-direction: column; }
+  .ach-modal-item {
+    display: block; padding: 13px 16px; border-radius: 10px; font-size: 14px;
+    color: var(--text); text-decoration: none; transition: background .15s;
+  }
+  .ach-modal-item + .ach-modal-item { border-top: 1px solid var(--line); }
+  .ach-modal-item:hover { background: rgba(91,141,239,.08); }
+  .ach-modal-item small { color: var(--muted); display: block; margin-top: 2px; font-size: 12px; }
+
+  /* 统计条 */
+  .stat { transition: transform .2s, border-color .2s; }
+  .stat:hover { transform: translateY(-3px); border-color: rgba(91,141,239,.45); }
+
+  /* 返回顶部 */
+  #toTop {
+    position: fixed; right: 24px; bottom: 24px; z-index: 60;
+    width: 46px; height: 46px; border-radius: 50%; border: none; cursor: pointer;
+    background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff;
+    font-size: 20px; box-shadow: 0 8px 24px rgba(91,141,239,.35);
+    opacity: 0; pointer-events: none; transition: opacity .3s, transform .3s;
+  }
+  #toTop.show { opacity: 1; pointer-events: auto; }
+  #toTop:hover { transform: translateY(-3px); }
+
+  footer { border-top: 1px solid var(--line); padding: 36px 0; margin-top: 30px; text-align: center; color: var(--muted); font-size: 13px; }
+  footer a { color: var(--accent); }
+  .footer-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+
+  /* 滚动渐显 */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">张皖晴<span> · 个人主页</span></div>
+    <div class="nav-links">
+      <a href="#intro">自我介绍</a>
+      <a href="#cert">成果与证书</a>
+      <a href="#skills">技术栈</a>
+      <a href="#harmony">鸿蒙 App</a>
+      <a href="#tool">开源测试工具</a>
+      <a href="#agent">智能体实验</a>
+      <a href="#project">综合项目</a>
+      <a href="#video">视频资料</a>
+      <a href="#timeline">成长轨迹</a>
+      <a href="#course">课程学习</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="avatar">张皖晴</div>
+      <div>
+        <h1>张皖晴<span class="en">Zhang Wanqing</span></h1>
+        <div class="subtitle"><b>计算与智能技术学院</b> · 数据科学与大数据技术</div>
+        <p class="intro-line">把「想法」落地成「能跑的代码」——关注数据、开源合规与 AI 智能体，坚持每一个项目可运行、可复现、可交付。</p>
+        <div class="tags">
+          <span class="tag">学号 f25016517</span>
+          <span class="tag t2">数据科学与大数据技术</span>
+          <span class="tag t3">开源 · AI · 智能体</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn-primary" href="https://github.com/ZWQ-Tech" target="_blank">在 GitHub 上找到我 ↗</a>
+          <a class="btn-ghost2" href="#project">浏览项目 ↓</a>
+          <div class="gh-badges">
+            <span class="gh-badge"><span class="dot"></span> 5 个公开仓库</span>
+            <span class="gh-badge"><b>HCIA-AI</b> 华为认证</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 1 自我介绍 -->
+  <section id="intro">
+    <div class="sec-head reveal">
+      <div class="no">01</div>
+      <h2>自我介绍</h2>
+      <p>关于我——一个把"想法"落地成"能跑的代码"的数据科学与大数据技术专业学生。</p>
+    </div>
+    <div class="intro-grid">
+      <div class="intro-card reveal">
+        <h3>关于我</h3>
+        <p>我是计算与智能技术学院数据科学与大数据技术专业的学生。对「数据 × 智能体」有着持续的热情：既关心数据本身——如何采集、清洗、建模并让数字说话，也关心如何把一段流程交给智能体自主完成。</p>
+        <p>在课程与实践中，我独立完成了多个从 0 到 1 的项目：从 HarmonyOS 应用开发、开源许可证合规智能体，到门店补货数字化协同系统，以及面向真实场景的 AI 投标平台原型。每一个项目都坚持「可运行、可复现、可交付」——代码在 GitHub 开源，Demo 可在浏览器直接打开体验。</p>
+        <p>我习惯用工程化的方式思考问题：先定义清楚口径与边界，再动手实现；关注规则引擎、工具调用（Function Calling）、数据契约与可追溯性。我相信，一个优秀的方案不是「预测得最准」，而是「最经得起复核」。</p>
+      </div>
+      <div class="intro-card reveal">
+        <h3>基本信息</h3>
+        <ul class="info-list">
+          <li><span class="k">姓名</span><span class="v">张皖晴</span></li>
+          <li><span class="k">学号</span><span class="v">f25016517</span></li>
+          <li><span class="k">学院</span><span class="v">计算与智能技术学院</span></li>
+          <li><span class="k">专业</span><span class="v">数据科学与大数据技术</span></li>
+        </ul>
+        <h3 style="margin-top:20px">兴趣方向</h3>
+        <div class="tags" style="margin-top:12px">
+          <span class="tag">数据可视化</span>
+          <span class="tag">开源合规</span>
+          <span class="tag t2">大模型应用</span>
+          <span class="tag t2">智能体开发</span>
+          <span class="tag t3">鸿蒙开发</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 成果与证书（置于顶部） -->
+  <section id="cert">
+    <div class="sec-head reveal">
+      <div class="no">成果</div>
+      <h2>成果与证书</h2>
+      <p>点击下方成果方块查看详情；证书为实际证书照片。</p>
+    </div>
+
+    <!-- 成果方块（正方形） -->
+    <div class="ach-square-grid">
+      <button class="ach-square reveal" type="button" data-group="projects">
+        <span class="ach-square-icon">🚀</span>
+        <span class="ach-square-num" style="color:var(--accent)">7</span>
+        <span class="ach-square-label">完成项目</span>
+        <span class="ach-square-hint">点击查看项目清单</span>
+      </button>
+      <button class="ach-square reveal" type="button" data-group="repos">
+        <span class="ach-square-icon">🐙</span>
+        <span class="ach-square-num" style="color:var(--teal)">5</span>
+        <span class="ach-square-label">GitHub 开源仓库</span>
+        <span class="ach-square-hint">点击查看仓库列表</span>
+      </button>
+      <button class="ach-square reveal" type="button" data-group="certs">
+        <span class="ach-square-icon">📜</span>
+        <span class="ach-square-num" style="color:var(--gold)">2</span>
+        <span class="ach-square-label">证书</span>
+        <span class="ach-square-hint">点击查看证书列表</span>
+      </button>
+    </div>
+
+    <!-- 证书（正常照片比例） -->
+    <h3 class="cert-title reveal">证书</h3>
+    <div class="cert-list">
+      <a class="cert-card reveal" href="hcia-cert.png" target="_blank" title="点击查看大图">
+        <img src="hcia-cert.png" alt="HCIA-AI 华为认证 ICT 工程师（AI 方向）证书">
+        <div class="cert-card-info">
+          <b>HCIA-AI · 华为认证 ICT 工程师（AI 方向）</b>
+          <span>持有人 Wanqing Zhang · 有效期至 2029-10-28</span>
+        </div>
+      </a>
+      <div class="cert-card cert-card-empty reveal" title="证书照片待补充">
+        <div class="cert-empty-inner">
+          <div class="cert-empty-icon">📜</div>
+          <div class="cert-empty-t">开源通识证书</div>
+          <div class="cert-empty-s">照片待补充</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 成果详情弹窗 -->
+    <div class="ach-modal" id="achModal">
+      <div class="ach-modal-mask" data-close></div>
+      <div class="ach-modal-body">
+        <button class="ach-modal-close" type="button" data-close>✕</button>
+        <h3 class="ach-modal-title"></h3>
+        <div class="ach-modal-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 技术栈 -->
+  <section id="skills">
+    <div class="sec-head reveal">
+      <div class="no">02</div>
+      <h2>技术栈</h2>
+      <p>常用技术与工具的掌握程度。</p>
+    </div>
+    <div class="intro-grid">
+      <div class="intro-card reveal">
+        <h3>核心技能</h3>
+        <ul class="skill-list">
+          <li>
+            <div class="sk-top"><span class="nm">Python（数据处理 / 脚本 / Agent）</span><span class="lv">熟练</span></div>
+            <div class="bar"><div class="fill" data-w="90"></div></div>
+          </li>
+          <li>
+            <div class="sk-top"><span class="nm">JavaScript / HTML / CSS</span><span class="lv">熟练</span></div>
+            <div class="bar"><div class="fill" data-w="85"></div></div>
+          </li>
+          <li>
+            <div class="sk-top"><span class="nm">ArkTS / HarmonyOS 应用开发</span><span class="lv">掌握</span></div>
+            <div class="bar"><div class="fill" data-w="72"></div></div>
+          </li>
+          <li>
+            <div class="sk-top"><span class="nm">SQL / 数据分析</span><span class="lv">掌握</span></div>
+            <div class="bar"><div class="fill" data-w="70"></div></div>
+          </li>
+        </ul>
+      </div>
+      <div class="intro-card reveal">
+        <h3>专业方向</h3>
+        <ul class="skill-list">
+          <li>
+            <div class="sk-top"><span class="nm">智能体 / Function Calling / 工具调用</span><span class="lv">熟练</span></div>
+            <div class="bar"><div class="fill" data-w="85"></div></div>
+          </li>
+          <li>
+            <div class="sk-top"><span class="nm">开源合规 / License 检测（ScanCode）</span><span class="lv">掌握</span></div>
+            <div class="bar"><div class="fill" data-w="78"></div></div>
+          </li>
+          <li>
+            <div class="sk-top"><span class="nm">大模型应用 / Prompt 工程</span><span class="lv">掌握</span></div>
+            <div class="bar"><div class="fill" data-w="75"></div></div>
+          </li>
+          <li>
+            <div class="sk-top"><span class="nm">版本控制 Git / GitHub</span><span class="lv">熟练</span></div>
+            <div class="bar"><div class="fill" data-w="88"></div></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 鸿蒙 app -->
+  <section id="harmony">
+    <div class="sec-head reveal">
+      <div class="no">03</div>
+      <h2>鸿蒙 App</h2>
+      <p>基于 HarmonyOS（ArkTS）开发的应用。</p>
+    </div>
+    <div class="grid">
+      <div class="card proj reveal">
+        <div class="top">
+          <div class="icon" style="background:linear-gradient(135deg,#2dd4bf,#5b8def)">卡</div>
+          <span class="lang">ArkTS · HarmonyOS</span>
+        </div>
+        <h3>学习记忆卡片制作台</h3>
+        <p>面向鸿蒙 PC / 2in1 的记忆卡片制作应用。支持批量录入（题干｜答案 #标签）、实时预览、自动查重、标签筛选、掌握度徽章与行内编辑；核心代码集中于单个 Index.ets，无第三方依赖，兼容 SDK 6.1.1(24) 2in1 设备，可直接用模拟器运行。</p>
+        <div class="tech-tags"><span>ArkTS</span><span>HarmonyOS</span><span>DevEco Studio</span></div>
+        <div class="links">
+          <a class="btn" href="https://github.com/ZWQ-Tech/memorycards" target="_blank">GitHub 仓库</a>
+          <a class="btn" href="https://zwq-tech.github.io/memorycards/" target="_blank">在线 Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 开源测试工具使用 -->
+  <section id="tool">
+    <div class="sec-head reveal">
+      <div class="no">04</div>
+      <h2>开源测试工具使用</h2>
+      <p>使用开源工具对真实开源项目进行合规扫描与分析。</p>
+    </div>
+    <div class="grid">
+      <div class="card proj reveal">
+        <div class="top">
+          <div class="icon" style="background:linear-gradient(135deg,#f5c04a,#ec6c9e)">扫</div>
+          <span class="lang">ScanCode Toolkit</span>
+        </div>
+        <h3>开源许可证合规扫描（作业 1）</h3>
+        <p>使用 ScanCode Toolkit 32.5.0 对 Apache Commons Lang 项目进行许可证合规扫描：717 个文件、703 条 Apache-2.0、3 条复合表达式误报、11 个无许可证文件，产出扫描报告并逐条分析，形成《开源许可合规工具选型手册》。</p>
+        <div class="tech-tags"><span>ScanCode</span><span>License</span><span>Commons Lang</span></div>
+        <div class="links">
+          <a class="btn" href="https://github.com/ZWQ-Tech/licenselens" target="_blank">相关仓库</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 智能体实验项目 -->
+  <section id="agent">
+    <div class="sec-head reveal">
+      <div class="no">05</div>
+      <h2>智能体实验项目</h2>
+      <p>把判断逻辑交给智能体自主完成——工具调用驱动的合规检查智能体。</p>
+    </div>
+    <div class="grid">
+      <div class="card proj reveal">
+        <div class="top">
+          <div class="icon" style="background:linear-gradient(135deg,#7c5cff,#5b8def)">智</div>
+          <span class="lang">Python · Agent</span>
+        </div>
+        <h3>LicenseLens · 开源许可证合规检查智能体</h3>
+        <p>输入一个项目目录，智能体自主决定「先看什么、再查什么」，最终输出合规报告。自实现 6 个工具（扫描 / 识别许可证 / 解析依赖 / 查询许可证 / 规则表判定 / 落盘报告），支持 plan（无 Key 固定流程）与 live（Function Calling 自主决策）双模式，用真实规则表判定 GPL 等冲突。</p>
+        <div class="tech-tags"><span>Python</span><span>Function Calling</span><span>LLM Agent</span></div>
+        <div class="links">
+          <a class="btn" href="https://github.com/ZWQ-Tech/licenselens" target="_blank">GitHub 仓库</a>
+          <a class="btn ghost" href="https://github.com/ZWQ-Tech/licenselens/tree/main/docs" target="_blank">实验报告</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 综合项目 -->
+  <section id="project">
+    <div class="sec-head reveal">
+      <div class="no">06</div>
+      <h2>综合项目</h2>
+      <p>跨多个环节的完整项目，从业务挖掘到最小可用系统的端到端交付。</p>
+    </div>
+    <div class="grid">
+      <div class="card proj reveal">
+        <div class="top">
+          <div class="icon" style="background:linear-gradient(135deg,#5b8def,#2dd4bf)">店</div>
+          <span class="lang">JS · 产品级 Demo</span>
+        </div>
+        <h3>门店补货与库存协同系统</h3>
+        <p>拾光连锁门店「一边缺货、一边积压」问题，从业务挖掘（34 条调研事实）到行业分析、双流程图、设计方案、报价单，再到可交互的最小可用系统。核心洞察：根因不是预测不准，而是「可售库存口径与缺货标识」治理。Demo 含 9 视图、演示引导、自动滚动，6 个岗位角色可点击查看访谈记录。</p>
+        <div class="tech-tags"><span>JavaScript</span><span>规则引擎</span><span>FDE 交付</span></div>
+        <div class="links">
+          <a class="btn" href="https://github.com/ZWQ-Tech/retail-replenishment-copilot" target="_blank">GitHub 仓库</a>
+          <a class="btn" href="https://zwq-tech.github.io/retail-replenishment-copilot/" target="_blank">在线 Demo</a>
+        </div>
+      </div>
+      <div class="card proj reveal">
+        <div class="top">
+          <div class="icon" style="background:linear-gradient(135deg,#ec6c9e,#f5c04a)">标</div>
+          <span class="lang">HTML · 交互 Demo</span>
+        </div>
+        <h3>AI 投标协同平台 Demo</h3>
+        <p>探索 AI 赋能投标场景的交互式演示 Demo（东浩兰生 AI 来赛数智化创新大赛参赛项目），用可视化交互展示 AI 在投标协同中的能力。</p>
+        <div class="tech-tags"><span>HTML</span><span>交互演示</span><span>参赛项目</span></div>
+        <div class="links">
+          <a class="btn" href="https://github.com/ZWQ-Tech/ai-bidding-platform-demo" target="_blank">GitHub 仓库</a>
+        </div>
+      </div>
+      <div class="card proj reveal">
+        <div class="top">
+          <div class="icon" style="background:linear-gradient(135deg,#2dd4bf,#7c5cff)">志</div>
+          <span class="lang">Python · Streamlit</span>
+        </div>
+        <h3>校园志愿时长汇总助手</h3>
+        <p>Streamlit + 通义千问 Tool Calling 构建的 LLM Agent，把「查志愿记录 → 统计时长 → 导出 Excel」和「找校内外志愿活动」全部交给自然语言对话完成，支持全国 1300+ 高校、368 城市逐级筛选与链式工具调用。</p>
+        <div class="tech-tags"><span>Python</span><span>Streamlit</span><span>通义千问</span></div>
+        <div class="links">
+          <a class="btn" href="https://github.com/ZWQ-Tech/volunteer-hours-assistant" target="_blank">GitHub 仓库</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 视频资料 -->
+  <section id="video">
+    <div class="sec-head reveal">
+      <div class="no">07</div>
+      <h2>视频资料</h2>
+      <p>个人展示与项目演示视频。</p>
+    </div>
+    <div class="card reveal" style="padding:0;overflow:hidden;">
+      <video controls preload="metadata" style="width:100%;display:block;aspect-ratio:16/9;background:#000;" poster="">
+        <source src="campus-video.mp4" type="video/mp4">
+        你的浏览器不支持视频播放，请<a href="campus-video.mp4" download>点击下载视频</a>。
+      </video>
+      <div style="padding:16px 20px;border-top:1px solid var(--line);">
+        <div style="font-size:15px;font-weight:600;">上海杉达学院校园航拍宣传片</div>
+        <div style="font-size:13px;color:var(--muted);margin-top:4px;">4K 高级科技光影 · 航拍远镜头 —— 校园形象展示</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 成长轨迹 -->
+  <section id="timeline">
+    <div class="sec-head reveal">
+      <div class="no">08</div>
+      <h2>学习成长轨迹</h2>
+      <p>从第一行代码到完整项目交付的进阶之路。</p>
+    </div>
+    <div class="card reveal">
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">起步 · 编程与数据基础</div>
+          <div class="tl-title">Python / SQL / 数据结构</div>
+          <div class="tl-desc">打好编程与数据处理基础，完成五子棋人机对弈等实践任务，掌握工程化调试与问题定位能力。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">进阶 · 开源与合规</div>
+          <div class="tl-title">ScanCode 合规扫描 + LicenseLens 智能体</div>
+          <div class="tl-desc">深入开源许可证合规，从工具扫描到自研合规检查智能体，理解规则表判定与工具调用。</div>
+          <span class="tl-tag">开源创新思维</span>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">拓展 · 端侧开发</div>
+          <div class="tl-title">HarmonyOS 应用 · 记忆卡片制作台</div>
+          <div class="tl-desc">用 ArkTS 开发鸿蒙应用，掌握 DevEco Studio 与 2in1 设备适配。</div>
+          <span class="tl-tag">鸿蒙开发</span>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">实战 · 大模型应用</div>
+          <div class="tl-title">志愿时长助手 + AI 投标平台</div>
+          <div class="tl-desc">用 Streamlit + 通义千问构建 LLM Agent，参与 AI 创新大赛，把大模型能力落地到真实场景。</div>
+          <span class="tl-tag">大模型应用</span>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">综合 · 端到端交付</div>
+          <div class="tl-title">门店补货与库存协同系统（FDE）</div>
+          <div class="tl-desc">完整走通「业务挖掘 → 行业分析 → 方案设计 → 报价 → 可交互 Demo」，具备端到端项目交付能力。</div>
+          <span class="tl-tag">综合项目</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 课程学习 -->
+  <section id="course">
+    <div class="sec-head reveal">
+      <div class="no">09</div>
+      <h2>课程与实验</h2>
+      <p>已完成的课程作业与实验报告。</p>
+    </div>
+    <div class="course-grid">
+      <div class="course reveal">
+        <div class="c-icon" style="background:rgba(91,141,239,.15)">📘</div>
+        <div>
+          <div class="c-name">开源创新思维</div>
+          <div class="c-desc">开源许可证合规扫描、智能体实验、鸿蒙 App 等结业项目</div>
+          <span class="c-status">已完成</span>
+        </div>
+      </div>
+      <div class="course reveal">
+        <div class="c-icon" style="background:rgba(45,212,191,.15)">📗</div>
+        <div>
+          <div class="c-name">开源 AI 技术实践</div>
+          <div class="c-desc">Streamlit + 通义千问 Tool Calling，校园志愿时长汇总助手</div>
+          <span class="c-status">已完成</span>
+        </div>
+      </div>
+      <div class="course reveal">
+        <div class="c-icon" style="background:rgba(245,192,74,.15)">📙</div>
+        <div>
+          <div class="c-name">FDE 业务挖掘训练</div>
+          <div class="c-desc">门店补货与库存协同，业务挖掘 + 行业分析 + 方案报价 + MVP</div>
+          <span class="c-status">已完成</span>
+        </div>
+      </div>
+      <div class="course reveal">
+        <div class="c-icon" style="background:rgba(236,108,158,.15)">📕</div>
+        <div>
+          <div class="c-name">实践任务实验报告</div>
+          <div class="c-desc">五子棋人机对弈、AI 辅助新闻稿、AI 非遗宣传短片等</div>
+          <span class="c-status">已完成</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    © 2026 张皖晴 · 计算与智能技术学院 · 数据科学与大数据技术<br>
+    GitHub：<a href="https://github.com/ZWQ-Tech" target="_blank">github.com/ZWQ-Tech</a>
+    <div class="footer-tags">
+      <span class="tag">Python</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag t2">HarmonyOS</span>
+      <span class="tag t2">智能体</span>
+      <span class="tag t3">开源合规</span>
+      <span class="tag t3">数据科学</span>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" title="返回顶部">↑</button>
+
+<script>
+  // 技术栈进度条动画
+  function animateBars() {
+    document.querySelectorAll('.bar .fill').forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 40 && !el.dataset.done) {
+        el.dataset.done = '1';
+        el.style.width = el.dataset.w + '%';
+      }
+    });
+  }
+
+  // 滚动渐显
+  function reveal() {
+    document.querySelectorAll('.reveal').forEach(function(el) {
+      var rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 60) el.classList.add('in');
+    });
+  }
+
+  // 返回顶部按钮
+  var toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', function() {
+    reveal();
+    animateBars();
+    if (window.scrollY > 400) toTop.classList.add('show');
+    else toTop.classList.remove('show');
+  });
+  toTop.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // 成果方块点击弹出详情弹窗
+  var achData = {
+    projects: {
+      title: '完成项目（7 个）',
+      items: [
+        { name: '学习记忆卡片制作台', desc: '鸿蒙 App · ArkTS', href: '#harmony' },
+        { name: '开源许可证合规扫描', desc: 'ScanCode 扫描 Commons Lang', href: '#tool' },
+        { name: 'LicenseLens 许可证合规智能体', desc: 'Function Calling 智能体', href: '#agent' },
+        { name: '门店补货与库存协同系统', desc: 'FDE 综合项目 · 规则引擎', href: '#project' },
+        { name: 'AI 投标协同平台 Demo', desc: '面向真实场景的原型', href: '#project' },
+        { name: '校园志愿时长汇总助手', desc: 'Streamlit + 通义千问', href: '#project' },
+        { name: '实践任务实验报告', desc: '五子棋 / 新闻稿 / 非遗短片', href: '#course' }
+      ]
+    },
+    repos: {
+      title: 'GitHub 开源仓库（5 个）',
+      items: [
+        { name: 'retail-replenishment-copilot', desc: '门店补货与库存协同', href: 'https://github.com/ZWQ-Tech/retail-replenishment-copilot' },
+        { name: 'licenselens', desc: '开源许可证合规智能体', href: 'https://github.com/ZWQ-Tech/licenselens' },
+        { name: 'volunteer-hours-assistant', desc: '校园志愿时长助手', href: 'https://github.com/ZWQ-Tech/volunteer-hours-assistant' },
+        { name: 'memorycards', desc: '记忆卡片（鸿蒙）', href: 'https://github.com/ZWQ-Tech/memorycards' },
+        { name: 'ai-bidding-platform-demo', desc: 'AI 投标协同平台', href: 'https://github.com/ZWQ-Tech/ai-bidding-platform-demo' }
+      ]
+    },
+    certs: {
+      title: '证书（2 项）',
+      items: [
+        { name: 'HCIA-AI · 华为认证 ICT 工程师（AI 方向）', desc: '有效期至 2029-10-28', href: 'hcia-cert.png' },
+        { name: '开源通识证书', desc: '照片待补充', href: '#' }
+      ]
+    }
+  };
+
+  var achModal = document.getElementById('achModal');
+  var achModalTitle = achModal.querySelector('.ach-modal-title');
+  var achModalList = achModal.querySelector('.ach-modal-list');
+
+  function openAchModal(group) {
+    var data = achData[group];
+    if (!data) return;
+    achModalTitle.textContent = data.title;
+    achModalList.innerHTML = data.items.map(function(it) {
+      var target = it.href.indexOf('http') === 0 ? ' target="_blank"' : '';
+      return '<a class="ach-modal-item" href="' + it.href + '"' + target + '>' +
+             it.name + '<small>' + it.desc + '</small></a>';
+    }).join('');
+    achModal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeAchModal() {
+    achModal.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.ach-square').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      openAchModal(btn.dataset.group);
+    });
+  });
+
+  achModal.querySelectorAll('[data-close]').forEach(function(el) {
+    el.addEventListener('click', closeAchModal);
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeAchModal();
+  });
+
+  // 初始触发
+  reveal();
+  animateBars();
+</script>
+
+</body>
+</html>
